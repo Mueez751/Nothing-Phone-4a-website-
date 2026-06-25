@@ -1,0 +1,643 @@
+/* Nothing Phone (4a) Design System */
+
+:root {
+  --bg-color: #080808;
+  --bg-darker: #040404;
+  --text-color: #f7f7f7;
+  --text-subtle: #8a8a8a;
+  --text-dark: #444444;
+  --accent-color: #ff2a2a; /* Nothing signature red */
+  --accent-glow: rgba(255, 42, 42, 0.4);
+  --glass-bg: rgba(14, 14, 14, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.15);
+  
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Share Tech Mono', 'Courier New', Courier, monospace;
+}
+
+/* Global Reset & Scrollbars */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Typography & General Classes */
+h1, h2, h3, h4 {
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Preloader Screen */
+#loader-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-darker);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+}
+
+.loader-content {
+  width: 300px;
+  text-align: center;
+}
+
+.dot-matrix-logo {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  letter-spacing: 0.3em;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  animation: logo-pulse 2s infinite ease-in-out;
+  text-indent: 0.3em;
+}
+
+.loader-status {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+#load-percentage {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.loader-bar-outer {
+  width: 100%;
+  height: 2px;
+  background: #1a1a1a;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+#loader-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: var(--accent-color);
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 6px var(--accent-color);
+}
+
+/* Header & Nav */
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  background: rgba(8, 8, 8, 0.4);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-logo {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.5em;
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+
+.brand-logo:hover {
+  color: var(--accent-color);
+}
+
+#main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav-item {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  font-weight: 500;
+  transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+}
+
+.nav-item:hover {
+  color: var(--text-color);
+  transform: translateY(-1px);
+}
+
+.btn-buy-now {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  border: 1px solid var(--text-color);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-buy-now:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Canvas background container */
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: radial-gradient(circle at center, #1c1c1e 0%, #030303 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#animation-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Technical blueprint grid overlay */
+.vibe-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-size: 60px 60px;
+  background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.02) 1.5px, transparent 1.5px);
+  z-index: 2;
+}
+
+/* Scroll Content Styling */
+#scroll-wrapper {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.scroll-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 2rem;
+  pointer-events: none; /* Let clicks pass through to standard links if necessary */
+}
+
+/* Ensure interactive elements inside sections can be clicked */
+.scroll-section .content-wrapper, 
+.scroll-section .glass-card {
+  pointer-events: auto;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Active visible scroll class toggled via JS */
+.scroll-section.active-visible .content-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Alignments */
+.text-center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-left-side {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.text-right-side {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.text-center-glass {
+  display: flex;
+  justify-content: center;
+}
+
+/* Hero Content */
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.25em;
+  color: var(--accent-color);
+  margin-bottom: 1.5rem;
+}
+
+.dot-accent::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  box-shadow: 0 0 8px var(--accent-color);
+}
+
+.glitch-title {
+  font-size: 6rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-subtle);
+  max-width: 500px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.scroll-indicator {
+  margin-top: 5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  animation: bounce-slow 2s infinite ease-in-out;
+}
+
+.scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--text-dark), transparent);
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 3rem;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+}
+
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.glass-card h2 {
+  font-size: 2.2rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.glass-card p {
+  color: var(--text-subtle);
+  line-height: 1.6;
+  font-size: 0.98rem;
+  margin-bottom: 2rem;
+}
+
+.card-footer {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-color);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-indicator-dot {
+  width: 6px;
+  height: 6px;
+  background: #39ff14; /* bright neon green */
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px #39ff14;
+  animation: blink-green 2s infinite step-end;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  color: var(--text-color);
+}
+
+/* Full Width Card Styling (OS Section) */
+.full-width-card {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.large-body {
+  font-size: 1.15rem !important;
+  max-width: 650px;
+  margin: 0 auto 2.5rem auto !important;
+}
+
+.widget-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.mini-widget {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.2rem 2.2rem;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.widget-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  letter-spacing: 0.1em;
+}
+
+.widget-value {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* Specifications Section (Solid scroll over background) */
+.specs-section {
+  position: relative;
+  z-index: 5;
+  background: var(--bg-darker);
+  min-height: 100vh;
+  padding: 120px 2rem 80px 2rem;
+  border-top: 1px solid var(--glass-border);
+  pointer-events: auto;
+}
+
+.specs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.specs-title {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin-bottom: 4rem;
+  text-transform: uppercase;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 6rem;
+}
+
+.specs-category {
+  max-width: none; /* Override standard glass-card width limit */
+  padding: 2.2rem;
+}
+
+.specs-category h3 {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent-color);
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.specs-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.specs-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.spec-name {
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+  letter-spacing: 0.02em;
+}
+
+.spec-value {
+  font-size: 0.98rem;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+/* Footer Styling */
+#site-footer {
+  margin-top: 4rem;
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 2rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dark);
+  letter-spacing: 0.05em;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyright {
+  color: var(--text-subtle);
+}
+
+/* Animations */
+@keyframes logo-pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes blink-green {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Responsive Rules */
+@media (max-width: 900px) {
+  .glitch-title {
+    font-size: 4rem;
+  }
+  
+  #main-nav {
+    display: none; /* Hide header navigation link lists on tablet/mobile for simplicity */
+  }
+  
+  .scroll-section {
+    padding: 100px 1.5rem;
+  }
+  
+  .text-left-side, .text-right-side {
+    justify-content: center;
+  }
+  
+  .glass-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .glitch-title {
+    font-size: 2.8rem;
+  }
+  
+  .specs-title {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .widget-row {
+    gap: 1rem;
+  }
+  
+  .mini-widget {
+    min-width: 100%;
+  }
+}
